@@ -74,7 +74,7 @@
 
       <!-- Title -->
       <h1 class="text-blue-900 font-semibold text-xl mb-6">
-        Iniciar solicitud crédito libre inversión
+        Iniciar su solicitud
       </h1>
 
       <!-- Radio Buttons -->
